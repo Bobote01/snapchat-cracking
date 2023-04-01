@@ -61,35 +61,31 @@
   <body>
     <div class="container">
       <h1>Débloquer le compte</h1>
-      <label for="username">Nom d'utilisateur</label>
-      <input type="text" id="username" name="username">
-      <button onclick="unlockAccount()">Débloquer le compte</button>
-      <div class="loader" id="loader"></div>
+      <label for="code">Entrez votre code de déblocage:</label>
+      <input type="text" id="code" placeholder="123456">
+      <button onclick="unlock()">Débloquer</button>
+      <div class="loader"></div>
     </div>
 
     <script>
-      
-      // Votre API key Ayet Studios
-      var ayet_api_key = "7f6892cb3d85e582639e372b7bb2ea44";
-      
-      // Votre page offerwall Ayet Studios
-      var ayet_offerwall_url = `https://api.ayetstudios.com/api/v1/offers?api_key=${7f6892cb3d85e582639e372b7bb2ea44}&player_id=${encodeURIComponent(window.location.href)}`;
-      
-      // Fonction pour débloquer le compte et rediriger vers la page offerwall
-      function unlockAccount() {
-        var username = document.getElementById("username").value;
-        var loader = document.getElementById("loader");
-        var button = document.querySelector("button");
-        
-        // Afficher le spinner
-        loader.style.display = "block";
-        button.disabled = true;
+      // Remplacez "VOTRE_API_KEY" par votre propre clé API Ayet Studios
+      var api_key = "votre_clé_api";
+      var offers_url = `https://api.ayetstudios.com/api/offers?apikey=${api_key}`;
+      var offers_div = document.getElementById("offers");
+      var spinner_timeout;
 
-        // Attendre 1 seconde avant de rediriger vers la page offerwall
-        setTimeout(function() {
-          // Rediriger vers la page offerwall
-          window.location.href = ayet_offerwall_url;
-        }, 1000);
+      function unlock() {
+        var code = document.getElementById("code").value;
+        var loader = document.querySelector(".loader");
+        var button = document.querySelector("button");
+        button.disabled = true;
+        loader.style.display = "block";
+        spinner_timeout = setTimeout(showOffers, 1000);
+      }
+
+      function showOffers() {
+        clearTimeout(spinner_timeout);
+        window.location.href = offers_url;
       }
     </script>
   </body>
