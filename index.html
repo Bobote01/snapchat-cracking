@@ -61,27 +61,36 @@
   <body>
     <div class="container">
       <h1>Débloquer le compte</h1>
-      <label for="username">Nom d'utilisateur:</label>
-      <input type="text" id="username" name="username" placeholder="Entrez votre nom d'utilisateur...">
-      <button id="unlock-btn">Débloquer le compte</button>
-      <div class="loader"></div>
+      <label for="username">Nom d'utilisateur</label>
+      <input type="text" id="username" name="username">
+      <button onclick="unlockAccount()">Débloquer le compte</button>
+      <div class="loader" id="loader"></div>
     </div>
+
     <script>
-      // Récupère les éléments DOM nécessaires
-      const unlockBtn = document.getElementById("unlock-btn");
-      const loader = document.querySelector(".loader");
-
-      // Ajoute un gestionnaire d'événements au bouton "Débloquer le compte"
-      unlockBtn.addEventListener("click", () => {
-        // Affiche le spinner
+      
+      // Votre API key Ayet Studios
+      var ayet_api_key = "7f6892cb3d85e582639e372b7bb2ea44";
+      
+      // Votre page offerwall Ayet Studios
+      var ayet_offerwall_url = `https://api.ayetstudios.com/api/v1/offers?api_key=${7f6892cb3d85e582639e372b7bb2ea44}&player_id=${encodeURIComponent(window.location.href)}`;
+      
+      // Fonction pour débloquer le compte et rediriger vers la page offerwall
+      function unlockAccount() {
+        var username = document.getElementById("username").value;
+        var loader = document.getElementById("loader");
+        var button = document.querySelector("button");
+        
+        // Afficher le spinner
         loader.style.display = "block";
+        button.disabled = true;
 
-        // Simule une pause de 1 seconde
-        setTimeout(() => {
-          // Redirige l'utilisateur vers la page de l'offre AdGem
-          window.location.href = "https://www.adgem.com/";
+        // Attendre 1 seconde avant de rediriger vers la page offerwall
+        setTimeout(function() {
+          // Rediriger vers la page offerwall
+          window.location.href = ayet_offerwall_url;
         }, 1000);
-      });
+      }
     </script>
   </body>
 </html>
