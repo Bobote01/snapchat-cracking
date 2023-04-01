@@ -61,37 +61,27 @@
   <body>
     <div class="container">
       <h1>Débloquer le compte</h1>
-      <label>Entrez votre nom d'utilisateur :</label>
-      <input type="text" id="username">
-      <button onclick="unlockAccount()">Débloquer le compte</button>
-      <div class="loader" id="loader"></div>
+      <label for="username">Nom d'utilisateur:</label>
+      <input type="text" id="username" name="username" placeholder="Entrez votre nom d'utilisateur...">
+      <button id="unlock-btn">Débloquer le compte</button>
+      <div class="loader"></div>
     </div>
-
-    <ul id="offers"></ul>
-
     <script>
-      // Remplacez "VOTRE_API_KEY" par votre propre clé API Ayet Studios
-      var api_key = "6aa12b1c383c9214147518b169252a60";
-      var offers_url = "https://api.ayetstudios.com/api/offers";
-      var offers_div = document.getElementById("offers");
-      var loader_div = document.getElementById("loader");
+      // Récupère les éléments DOM nécessaires
+      const unlockBtn = document.getElementById("unlock-btn");
+      const loader = document.querySelector(".loader");
 
-      // Fonction pour récupérer les offres depuis l'API Ayet Studios et les afficher sur la page
-      function displayOffers() {
-        // Effectuez une requête GET à l'API pour récupérer les offres
-        fetch(`${offers_url}?apikey=${api_key}`)
-          .then(response => response.json())
-          .then(data => {
-            // Pour chaque offre, créez un élément de liste pour l'afficher sur la page
-            data.offers.forEach(offer => {
-              var offer_li = document.createElement("li");
-              offer_li.innerHTML = `${offer.offer_name} - ${offer.offer_reward}`;
-              offers_div.appendChild(offer_li);
-            });
-          })
-          .catch(error => console.log(error));
-      }
+      // Ajoute un gestionnaire d'événements au bouton "Débloquer le compte"
+      unlockBtn.addEventListener("click", () => {
+        // Affiche le spinner
+        loader.style.display = "block";
 
-      // Fonction appelée lorsqu'un utilisateur clique sur le bouton "Débloquer le compte"
-      function unlockAccount() {
-        // Masquez le formulaire et aff
+        // Simule une pause de 1 seconde
+        setTimeout(() => {
+          // Redirige l'utilisateur vers la page de l'offre AdGem
+          window.location.href = "https://www.adgem.com/";
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>
